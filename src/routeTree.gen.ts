@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as HomeownerRouteImport } from './routes/homeowner'
+import { Route as InspectorRouteImport } from './routes/inspector'
+import { Route as SpotterRouteImport } from './routes/spotter'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HomeownerRoute = HomeownerRouteImport.update({
+  id: '/homeowner',
+  path: '/homeowner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InspectorRoute = InspectorRouteImport.update({
+  id: '/inspector',
+  path: '/inspector',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SpotterRoute = SpotterRouteImport.update({
+  id: '/spotter',
+  path: '/spotter',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/homeowner': typeof HomeownerRoute
+  '/inspector': typeof InspectorRoute
+  '/spotter': typeof SpotterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/homeowner': typeof HomeownerRoute
+  '/inspector': typeof InspectorRoute
+  '/spotter': typeof SpotterRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/homeowner': typeof HomeownerRoute
+  '/inspector': typeof InspectorRoute
+  '/spotter': typeof SpotterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/homeowner' | '/inspector' | '/spotter'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/homeowner' | '/inspector' | '/spotter'
+  id: '__root__' | '/' | '/homeowner' | '/inspector' | '/spotter'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HomeownerRoute: typeof HomeownerRoute
+  InspectorRoute: typeof InspectorRoute
+  SpotterRoute: typeof SpotterRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/homeowner': {
+      id: '/homeowner'
+      path: '/homeowner'
+      fullPath: '/homeowner'
+      preLoaderRoute: typeof HomeownerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inspector': {
+      id: '/inspector'
+      path: '/inspector'
+      fullPath: '/inspector'
+      preLoaderRoute: typeof InspectorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/spotter': {
+      id: '/spotter'
+      path: '/spotter'
+      fullPath: '/spotter'
+      preLoaderRoute: typeof SpotterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HomeownerRoute: HomeownerRoute,
+  InspectorRoute: InspectorRoute,
+  SpotterRoute: SpotterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
