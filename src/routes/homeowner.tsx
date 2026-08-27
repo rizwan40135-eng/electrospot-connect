@@ -62,10 +62,10 @@ function HomeownerPage() {
   const pct = Math.round((savings / retail) * 100);
 
   function book() {
-    if (name.trim().length < 2) return toast.error("Please enter your name.");
-    if (!/^[0-9+\s-]{8,20}$/.test(phone.trim())) return toast.error("Enter a valid phone number.");
-    if (!date) return toast.error("Pick an inspection date.");
-    if (!slot) return toast.error("Pick a time slot.");
+    if (name.trim().length < 2) { toast.error("Please enter your name."); return; }
+    if (!/^[0-9+\s-]{8,20}$/.test(phone.trim())) { toast.error("Enter a valid phone number."); return; }
+    if (!date) { toast.error("Pick an inspection date."); return; }
+    if (!slot) { toast.error("Pick a time slot."); return; }
     toast.success(`Inspection booked for ${date}, ${slot}. Our technician will call to confirm.`);
     setOpen(false);
     setName("");
