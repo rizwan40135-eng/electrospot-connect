@@ -54,9 +54,9 @@ function SpotterPage() {
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (address.trim().length < 6) return toast.error("Enter a fuller site address (min 6 characters).");
-    if (!stage) return toast.error("Pick the current construction stage.");
-    if (!photoName) return toast.error("Attach a site photo so we can verify the build.");
+    if (address.trim().length < 6) { toast.error("Enter a fuller site address (min 6 characters)."); return; }
+    if (!stage) { toast.error("Pick the current construction stage."); return; }
+    if (!photoName) { toast.error("Attach a site photo so we can verify the build."); return; }
 
     const lead: Lead = {
       id: "ES-" + Math.floor(1100 + Math.random() * 800),

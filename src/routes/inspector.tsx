@@ -60,7 +60,7 @@ function InspectorPage() {
   }
 
   function downloadQuote() {
-    if (client.trim().length < 2) return toast.error("Enter the homeowner name first.");
+    if (client.trim().length < 2) { toast.error("Enter the homeowner name first."); return; }
     const lines = [
       "ElectroSpot — Final Package Quotation",
       `Homeowner: ${client.trim().slice(0, 60)}`,

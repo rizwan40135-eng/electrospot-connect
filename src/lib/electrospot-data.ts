@@ -17,9 +17,9 @@ export type Lead = {
   status: LeadStage;
   submittedOn: string;
   reward: number;
-  ownerName?: string;
-  ownerPhone?: string;
-  photoNote?: string;
+  ownerName?: string | undefined;
+  ownerPhone?: string | undefined;
+  photoNote?: string | undefined;
   geo: string;
 };
 
