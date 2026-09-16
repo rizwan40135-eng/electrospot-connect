@@ -62,48 +62,46 @@
 }
 
 :root {
-  --radius: 0.75rem;
-  --background: oklch(0.19 0.026 258);
-  --foreground: oklch(0.975 0.008 250);
-  --card: oklch(0.235 0.028 258);
-  --card-foreground: oklch(0.975 0.008 250);
-  --popover: oklch(0.235 0.028 258);
-  --popover-foreground: oklch(0.975 0.008 250);
-  --primary: oklch(0.68 0.175 249);
-  --primary-foreground: oklch(0.16 0.03 258);
-  --secondary: oklch(0.29 0.03 258);
-  --secondary-foreground: oklch(0.965 0.01 250);
-  --muted: oklch(0.275 0.028 258);
-  --muted-foreground: oklch(0.72 0.024 254);
-  --accent: oklch(0.82 0.16 92);
-  --accent-foreground: oklch(0.2 0.03 258);
+  --radius: 0.5rem;
+  --background: oklch(0.982 0.006 82);
+  --foreground: oklch(0.29 0.014 52);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.29 0.014 52);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.29 0.014 52);
+  --primary: oklch(0.39 0.055 45);
+  --primary-foreground: oklch(0.982 0.006 82);
+  --secondary: oklch(0.94 0.012 72);
+  --secondary-foreground: oklch(0.39 0.055 45);
+  --muted: oklch(0.955 0.009 72);
+  --muted-foreground: oklch(0.52 0.025 48);
+  --accent: oklch(0.61 0.08 59);
+  --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.62 0.22 22);
   --destructive-foreground: oklch(0.98 0.005 250);
-  --border: oklch(0.34 0.03 258);
-  --input: oklch(0.34 0.03 258);
-  --ring: oklch(0.68 0.175 249);
-  --success: oklch(0.7 0.15 155);
-  --success-foreground: oklch(0.18 0.03 258);
-  --chart-1: oklch(0.68 0.175 249);
-  --chart-2: oklch(0.7 0.15 155);
-  --chart-3: oklch(0.82 0.16 92);
-  --chart-4: oklch(0.62 0.19 300);
-  --chart-5: oklch(0.65 0.2 22);
-  --sidebar: oklch(0.22 0.027 258);
-  --sidebar-foreground: oklch(0.975 0.008 250);
-  --sidebar-primary: oklch(0.68 0.175 249);
-  --sidebar-primary-foreground: oklch(0.16 0.03 258);
-  --sidebar-accent: oklch(0.29 0.03 258);
-  --sidebar-accent-foreground: oklch(0.965 0.01 250);
-  --sidebar-border: oklch(0.34 0.03 258);
-  --sidebar-ring: oklch(0.68 0.175 249);
+  --border: oklch(0.88 0.015 70);
+  --input: oklch(0.88 0.015 70);
+  --ring: oklch(0.61 0.08 59);
+  --success: oklch(0.55 0.11 145);
+  --success-foreground: oklch(1 0 0);
+  --chart-1: oklch(0.61 0.08 59);
+  --chart-2: oklch(0.55 0.11 145);
+  --chart-3: oklch(0.72 0.11 86);
+  --chart-4: oklch(0.52 0.06 32);
+  --chart-5: oklch(0.67 0.11 30);
+  --sidebar: oklch(0.965 0.009 72);
+  --sidebar-foreground: oklch(0.29 0.014 52);
+  --sidebar-primary: oklch(0.39 0.055 45);
+  --sidebar-primary-foreground: oklch(0.982 0.006 82);
+  --sidebar-accent: oklch(0.92 0.02 67);
+  --sidebar-accent-foreground: oklch(0.39 0.055 45);
+  --sidebar-border: oklch(0.88 0.015 70);
+  --sidebar-ring: oklch(0.61 0.08 59);
 
-  --gradient-electric: linear-gradient(135deg, oklch(0.68 0.175 249), oklch(0.78 0.13 205));
-  --gradient-slate: linear-gradient(180deg, oklch(0.22 0.027 258), oklch(0.17 0.024 258));
-  --shadow-glow: 0 8px 26px -10px oklch(0.68 0.175 249 / 0.65);
-  --shadow-card: 0 18px 40px -28px oklch(0.1 0.02 258 / 0.9);
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --shadow-glow: 0 10px 28px -16px oklch(0.39 0.055 45 / 0.35);
+  --shadow-card: 0 16px 40px -30px oklch(0.34 0.04 48 / 0.32);
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 
@@ -123,10 +121,6 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-body);
-    background-image:
-      radial-gradient(60rem 32rem at 12% -10%, oklch(0.68 0.175 249 / 0.16), transparent 70%),
-      radial-gradient(48rem 28rem at 100% 0%, oklch(0.78 0.13 205 / 0.1), transparent 70%);
-    background-attachment: fixed;
   }
 
   h1,
@@ -134,18 +128,15 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
   }
 }
 
 @utility surface-card {
-  background-image: var(--gradient-slate);
   box-shadow: var(--shadow-card);
 }
 
 @utility text-electric {
-  background-image: var(--gradient-electric);
-  background-clip: text;
-  color: transparent;
+  color: var(--color-accent);
 }
 

@@ -10,14 +10,14 @@ const links = [
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
+    <header className="sticky top-0 z-40 border-b border-border bg-card/90 backdrop-blur-xl">
+      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-4">
         <Link to="/" className="flex items-center gap-2 font-semibold tracking-tight">
-          <span className="grid size-8 place-items-center rounded-lg bg-primary text-primary-foreground shadow-[var(--shadow-glow)]">
+          <span className="grid size-9 rotate-3 place-items-center rounded-md bg-accent text-accent-foreground shadow-[var(--shadow-glow)]">
             <Zap className="size-4" />
           </span>
-          <span className="text-base">
-            Electro<span className="text-primary">Spot</span>
+          <span className="font-display text-lg font-semibold">
+            Electro<span className="text-accent">Spot</span>
           </span>
         </Link>
         <nav className="flex items-center gap-1 overflow-x-auto text-sm">
@@ -26,9 +26,9 @@ export function SiteHeader() {
               key={l.to}
               to={l.to}
               activeOptions={{ exact: l.to === "/" }}
-              activeProps={{ className: "bg-secondary text-foreground" }}
+              activeProps={{ className: "bg-secondary text-primary" }}
               inactiveProps={{ className: "text-muted-foreground hover:text-foreground" }}
-              className="whitespace-nowrap rounded-full px-3 py-1.5 transition-colors"
+              className="whitespace-nowrap rounded-md px-3 py-1.5 transition-colors"
             >
               {l.label}
             </Link>
