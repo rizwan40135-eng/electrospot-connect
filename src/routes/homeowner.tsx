@@ -37,6 +37,8 @@ export const Route = createFileRoute("/homeowner")({
         property: "og:description",
         content: "Compare retail vs ElectroSpot pricing on a complete bill of materials for your build.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: HomeownerPage,

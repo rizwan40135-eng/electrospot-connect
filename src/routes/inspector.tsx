@@ -27,6 +27,8 @@ export const Route = createFileRoute("/inspector")({
         property: "og:description",
         content: "Lead verification queue and digital quotation builder for ElectroSpot technicians.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: InspectorPage,

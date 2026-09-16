@@ -29,6 +29,8 @@ export const Route = createFileRoute("/spotter")({
       },
       { property: "og:title", content: "Lead Spotter Portal — ElectroSpot" },
       { property: "og:description", content: "Submit site leads and track cashback payouts on ElectroSpot." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: SpotterPage,
