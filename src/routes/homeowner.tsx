@@ -433,7 +433,11 @@ function HomeownerPage() {
                         </div>
                       </div>
                       <p className="rounded-lg bg-background/50 p-3 text-xs text-muted-foreground">
-                        Package in context: {SIZE_LABELS[size]} · {tier} · {inr(ours)}
+                        Package in context:{" "}
+                        {mode === "size"
+                          ? `${SIZE_LABELS[size]} · ${tier}`
+                          : `${brand.name} · ${itemCount} products`}{" "}
+                        · {inr(ours)}
                       </p>
                     </div>
                     <DialogFooter>
