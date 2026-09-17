@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { CalendarCheck, Check, ShieldCheck, Truck } from "lucide-react";
+import { CalendarCheck, Check, Minus, Plus, ShieldCheck, Truck } from "lucide-react";
 import { toast } from "sonner";
 
 import { SiteHeader } from "@/components/site-header";
@@ -309,6 +309,13 @@ function HomeownerPage() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
+                      {bom.length === 0 && (
+                        <TableRow>
+                          <TableCell colSpan={4} className="py-6 text-center text-sm text-muted-foreground">
+                            Add quantities above to build your list.
+                          </TableCell>
+                        </TableRow>
+                      )}
                       {bom.map((i) => (
                         <TableRow key={i.name}>
                           <TableCell>
