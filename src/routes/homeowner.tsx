@@ -61,20 +61,34 @@ const SIZES: HouseSize[] = ["1000", "1500", "2000"];
 const TIERS: Tier[] = ["Economy", "Standard", "Smart Home"];
 const SLOTS = ["09:00 – 11:00", "11:00 – 13:00", "14:00 – 16:00", "16:00 – 18:00"];
 
+type Mode = "size" | "custom";
+
 function HomeownerPage() {
+  const [mode, setMode] = useState<Mode>("size");
   const [size, setSize] = useState<HouseSize>("1500");
   const [tier, setTier] = useState<Tier>("Standard");
+  const [brandId, setBrandId] = useState("gm");
+  const [qty, setQty] = useState<Record<string, number>>({ ...DEFAULT_QUANTITIES });
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [date, setDate] = useState("");
   const [slot, setSlot] = useState("");
 
-  const bom = useMemo(() => buildBom(size, tier), [size, tier]);
+  const brand = BRANDS.find((b) => b.id === brandId) ?? BRANDS[0]!;
+  const bom = useMemo(
+    () => (mode === "size" ? buildBom(size, tier) : customBom(qty, brand.factor)),
+    [mode, size, tier, qty, brand.factor],
+  );
   const retail = bom.reduce((s, i) => s + i.retail, 0);
   const ours = bom.reduce((s, i) => s + i.ours, 0);
   const savings = retail - ours;
-  const pct = Math.round((savings / retail) * 100);
+  const pct = retail > 0 ? Math.round((savings / retail) * 100) : 0;
+  const itemCount = bom.length;
+
+  function setQ(id: string, v: number) {
+    setQty((p) => ({ ...p, [id]: Math.max(0, Math.min(999, v)) }));
+  }
 
   function book() {
     if (name.trim().length < 2) { toast.error("Please enter your name."); return; }
