@@ -21,7 +21,20 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { SIZE_LABELS, TIER_BLURB, buildBom, inr, type HouseSize, type Tier } from "@/lib/electrospot-data";
+import {
+  BRANDS,
+  DEFAULT_QUANTITIES,
+  PRODUCTS,
+  PRODUCT_CATEGORIES,
+  SIZE_LABELS,
+  TIER_BLURB,
+  brandPrice,
+  buildBom,
+  customBom,
+  inr,
+  type HouseSize,
+  type Tier,
+} from "@/lib/electrospot-data";
 
 export const Route = createFileRoute("/homeowner")({
   head: () => ({
