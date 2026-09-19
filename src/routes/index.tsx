@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, PackageCheck, Zap } from "lucide-react";
+import { ArrowRight, Zap } from "lucide-react";
 
 import heroImg from "@/assets/electrospot-home-products.jpg";
+import { BrandLogo, CatalogImage } from "@/components/catalog-image";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -93,9 +94,10 @@ function Landing() {
                   type="button"
                   variant={brand.id === item.id ? "default" : "outline"}
                   onClick={() => setBrandId(item.id)}
-                  className="shrink-0"
+                  className="h-auto min-w-36 shrink-0 flex-col gap-3 px-4 py-3"
                   aria-pressed={brand.id === item.id}
                 >
+                  <BrandLogo brand={item} />
                   {item.name}
                 </Button>
               ))}
@@ -106,9 +108,7 @@ function Landing() {
                 <Card key={product.id} className="border-border shadow-none transition-colors hover:border-accent">
                   <CardContent className="flex h-full flex-col p-5">
                     <div className="flex items-start justify-between gap-4">
-                      <span className="grid size-10 shrink-0 place-items-center rounded-md bg-secondary text-primary">
-                        <PackageCheck className="size-5" />
-                      </span>
+                      <CatalogImage src={product.image} alt={product.name} className="size-20" />
                       <span className="text-xs text-muted-foreground">{product.category}</span>
                     </div>
                     <h3 className="mt-5 font-display text-lg font-semibold text-primary">{product.name}</h3>

@@ -1,3 +1,10 @@
+import w15Image from "@/assets/products/wire-15.jpg";
+import w25Image from "@/assets/products/wire-25.jpg";
+import w40Image from "@/assets/products/wire-40.jpg";
+import w60Image from "@/assets/products/wire-60.jpg";
+import c25Image from "@/assets/products/conduit-25.jpg";
+import c32Image from "@/assets/products/conduit-32.jpg";
+
 export const LEAD_STAGES = [
   "Submitted",
   "Verified",
@@ -152,6 +159,8 @@ export function inr(n: number) {
 /* ---------- Product-wise (custom) estimator ---------- */
 
 export type Brand = {
+  logo: string;
+  logoOnDark?: boolean;
   id: string;
   name: string;
   note: string;
@@ -159,11 +168,11 @@ export type Brand = {
 };
 
 export const BRANDS: Brand[] = [
-  { id: "gm", name: "GM Modular", note: "Popular value-for-money modular range", factor: 1 },
-  { id: "havells", name: "Havells", note: "Wide service network, premium finish", factor: 1.18 },
-  { id: "polycab", name: "Polycab", note: "Strong in wires & cables", factor: 1.1 },
-  { id: "anchor", name: "Anchor by Panasonic", note: "Budget-friendly essentials", factor: 0.92 },
-  { id: "legrand", name: "Legrand", note: "High-end switches & automation", factor: 1.35 },
+  { id: "gm", logo: "/images/brands/gm.svg", name: "GM Modular", note: "Popular value-for-money modular range", factor: 1 },
+  { id: "havells", logo: "/images/brands/havells.svg", name: "Havells", note: "Wide service network, premium finish", factor: 1.18 },
+  { id: "polycab", logo: "/images/brands/polycab.png", name: "Polycab", note: "Strong in wires & cables", factor: 1.1 },
+  { id: "anchor", logo: "/images/brands/anchor.png", logoOnDark: true, name: "Anchor by Panasonic", note: "Budget-friendly essentials", factor: 0.92 },
+  { id: "legrand", logo: "/images/brands/legrand.png", logoOnDark: true, name: "Legrand", note: "High-end switches & automation", factor: 1.35 },
 ];
 
 export type ProductCategory =
@@ -175,6 +184,7 @@ export type ProductCategory =
   | "Data & Smart";
 
 export type Product = {
+  image: string;
   id: string;
   name: string;
   spec: string;
@@ -195,30 +205,30 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
 ];
 
 export const PRODUCTS: Product[] = [
-  { id: "w15", name: "FR Copper Wire 1.5 sq mm", spec: "90m coil, lighting circuits", category: "Wires & Cables", unit: "coil", retail: 2450, ours: 1890, defaultQty: 6 },
-  { id: "w25", name: "FR Copper Wire 2.5 sq mm", spec: "90m coil, power circuits", category: "Wires & Cables", unit: "coil", retail: 3850, ours: 2990, defaultQty: 4 },
-  { id: "w40", name: "FR-LSH Copper Wire 4 sq mm", spec: "90m coil, AC / geyser lines", category: "Wires & Cables", unit: "coil", retail: 6100, ours: 4780, defaultQty: 2 },
-  { id: "w60", name: "FR-LSH Copper Wire 6 sq mm", spec: "90m coil, mains sub-feed", category: "Wires & Cables", unit: "coil", retail: 8900, ours: 6950, defaultQty: 1 },
-  { id: "c25", name: "PVC Conduit Pipe 25mm", spec: "ISI heavy duty, 3m length", category: "Conduits & Boxes", unit: "length", retail: 185, ours: 139, defaultQty: 60 },
-  { id: "c32", name: "PVC Conduit Pipe 32mm", spec: "ISI heavy duty, 3m length", category: "Conduits & Boxes", unit: "length", retail: 265, ours: 198, defaultQty: 18 },
-  { id: "cbox", name: "Concealed GI Box", spec: "1M / 2M / 4M sizes", category: "Conduits & Boxes", unit: "no", retail: 145, ours: 105, defaultQty: 40 },
-  { id: "jbox", name: "Junction / Fan Box", spec: "Deep GI with hook", category: "Conduits & Boxes", unit: "no", retail: 210, ours: 158, defaultQty: 10 },
-  { id: "sw6", name: "Modular Switch 6A", spec: "1-way, matte finish", category: "Switches & Sockets", unit: "no", retail: 165, ours: 122, defaultQty: 60 },
-  { id: "sk16", name: "Modular Socket 16A", spec: "6A/16A universal", category: "Switches & Sockets", unit: "no", retail: 340, ours: 255, defaultQty: 18 },
-  { id: "plate", name: "Modular Plate + Frame", spec: "2M – 8M, glossy white", category: "Switches & Sockets", unit: "no", retail: 420, ours: 315, defaultQty: 32 },
-  { id: "dimmer", name: "Fan Regulator / Dimmer", spec: "Step-type modular", category: "Switches & Sockets", unit: "no", retail: 480, ours: 360, defaultQty: 6 },
-  { id: "db8", name: "Distribution Board 8-way", spec: "SPN, double door", category: "Protection & DB", unit: "set", retail: 3200, ours: 2450, defaultQty: 1 },
-  { id: "mcb", name: "MCB 6A–32A", spec: "C-curve, 10kA", category: "Protection & DB", unit: "no", retail: 320, ours: 240, defaultQty: 12 },
-  { id: "rccb", name: "RCCB 40A 30mA", spec: "Shock protection", category: "Protection & DB", unit: "no", retail: 2600, ours: 1990, defaultQty: 1 },
-  { id: "earth", name: "Earthing Kit", spec: "Copper plate + chemical", category: "Protection & DB", unit: "kit", retail: 8600, ours: 6700, defaultQty: 1 },
-  { id: "led", name: "LED Panel / COB Light", spec: "10W–15W recessed", category: "Lighting & Fans", unit: "no", retail: 560, ours: 410, defaultQty: 24 },
-  { id: "batten", name: "LED Batten 20W", spec: "4ft, cool white", category: "Lighting & Fans", unit: "no", retail: 640, ours: 470, defaultQty: 8 },
-  { id: "fan", name: "Ceiling Fan 1200mm", spec: "BEE 5-star", category: "Lighting & Fans", unit: "no", retail: 3400, ours: 2650, defaultQty: 5 },
-  { id: "exhaust", name: "Exhaust Fan 150mm", spec: "Bath / kitchen", category: "Lighting & Fans", unit: "no", retail: 1450, ours: 1090, defaultQty: 3 },
-  { id: "cat6", name: "Cat6 LAN Cable", spec: "305m box", category: "Data & Smart", unit: "box", retail: 7400, ours: 5600, defaultQty: 1 },
-  { id: "coax", name: "TV Coax + Outlets", spec: "RG6 with faceplates", category: "Data & Smart", unit: "drop", retail: 850, ours: 640, defaultQty: 4 },
-  { id: "smartsw", name: "Smart Wi-Fi Switch Module", spec: "Retrofit relay, app control", category: "Data & Smart", unit: "no", retail: 1850, ours: 1420, defaultQty: 0 },
-  { id: "hub", name: "Automation Hub + Sensors", spec: "Hub, motion, door, smoke", category: "Data & Smart", unit: "kit", retail: 14500, ours: 11200, defaultQty: 0 },
+  { id: "w15", image: w15Image, name: "FR Copper Wire 1.5 sq mm", spec: "90m coil, lighting circuits", category: "Wires & Cables", unit: "coil", retail: 2450, ours: 1890, defaultQty: 6 },
+  { id: "w25", image: w25Image, name: "FR Copper Wire 2.5 sq mm", spec: "90m coil, power circuits", category: "Wires & Cables", unit: "coil", retail: 3850, ours: 2990, defaultQty: 4 },
+  { id: "w40", image: w40Image, name: "FR-LSH Copper Wire 4 sq mm", spec: "90m coil, AC / geyser lines", category: "Wires & Cables", unit: "coil", retail: 6100, ours: 4780, defaultQty: 2 },
+  { id: "w60", image: w60Image, name: "FR-LSH Copper Wire 6 sq mm", spec: "90m coil, mains sub-feed", category: "Wires & Cables", unit: "coil", retail: 8900, ours: 6950, defaultQty: 1 },
+  { id: "c25", image: c25Image, name: "PVC Conduit Pipe 25mm", spec: "ISI heavy duty, 3m length", category: "Conduits & Boxes", unit: "length", retail: 185, ours: 139, defaultQty: 60 },
+  { id: "c32", image: c32Image, name: "PVC Conduit Pipe 32mm", spec: "ISI heavy duty, 3m length", category: "Conduits & Boxes", unit: "length", retail: 265, ours: 198, defaultQty: 18 },
+  { id: "cbox", image: "/images/products/cbox.svg", name: "Concealed GI Box", spec: "1M / 2M / 4M sizes", category: "Conduits & Boxes", unit: "no", retail: 145, ours: 105, defaultQty: 40 },
+  { id: "jbox", image: "/images/products/jbox.svg", name: "Junction / Fan Box", spec: "Deep GI with hook", category: "Conduits & Boxes", unit: "no", retail: 210, ours: 158, defaultQty: 10 },
+  { id: "sw6", image: "/images/products/sw6.svg", name: "Modular Switch 6A", spec: "1-way, matte finish", category: "Switches & Sockets", unit: "no", retail: 165, ours: 122, defaultQty: 60 },
+  { id: "sk16", image: "/images/products/sk16.svg", name: "Modular Socket 16A", spec: "6A/16A universal", category: "Switches & Sockets", unit: "no", retail: 340, ours: 255, defaultQty: 18 },
+  { id: "plate", image: "/images/products/plate.svg", name: "Modular Plate + Frame", spec: "2M – 8M, glossy white", category: "Switches & Sockets", unit: "no", retail: 420, ours: 315, defaultQty: 32 },
+  { id: "dimmer", image: "/images/products/dimmer.svg", name: "Fan Regulator / Dimmer", spec: "Step-type modular", category: "Switches & Sockets", unit: "no", retail: 480, ours: 360, defaultQty: 6 },
+  { id: "db8", image: "/images/products/db8.svg", name: "Distribution Board 8-way", spec: "SPN, double door", category: "Protection & DB", unit: "set", retail: 3200, ours: 2450, defaultQty: 1 },
+  { id: "mcb", image: "/images/products/mcb.svg", name: "MCB 6A–32A", spec: "C-curve, 10kA", category: "Protection & DB", unit: "no", retail: 320, ours: 240, defaultQty: 12 },
+  { id: "rccb", image: "/images/products/rccb.svg", name: "RCCB 40A 30mA", spec: "Shock protection", category: "Protection & DB", unit: "no", retail: 2600, ours: 1990, defaultQty: 1 },
+  { id: "earth", image: "/images/products/earth.svg", name: "Earthing Kit", spec: "Copper plate + chemical", category: "Protection & DB", unit: "kit", retail: 8600, ours: 6700, defaultQty: 1 },
+  { id: "led", image: "/images/products/led.svg", name: "LED Panel / COB Light", spec: "10W–15W recessed", category: "Lighting & Fans", unit: "no", retail: 560, ours: 410, defaultQty: 24 },
+  { id: "batten", image: "/images/products/batten.svg", name: "LED Batten 20W", spec: "4ft, cool white", category: "Lighting & Fans", unit: "no", retail: 640, ours: 470, defaultQty: 8 },
+  { id: "fan", image: "/images/products/fan.svg", name: "Ceiling Fan 1200mm", spec: "BEE 5-star", category: "Lighting & Fans", unit: "no", retail: 3400, ours: 2650, defaultQty: 5 },
+  { id: "exhaust", image: "/images/products/exhaust.svg", name: "Exhaust Fan 150mm", spec: "Bath / kitchen", category: "Lighting & Fans", unit: "no", retail: 1450, ours: 1090, defaultQty: 3 },
+  { id: "cat6", image: "/images/products/cat6.svg", name: "Cat6 LAN Cable", spec: "305m box", category: "Data & Smart", unit: "box", retail: 7400, ours: 5600, defaultQty: 1 },
+  { id: "coax", image: "/images/products/coax.svg", name: "TV Coax + Outlets", spec: "RG6 with faceplates", category: "Data & Smart", unit: "drop", retail: 850, ours: 640, defaultQty: 4 },
+  { id: "smartsw", image: "/images/products/smartsw.svg", name: "Smart Wi-Fi Switch Module", spec: "Retrofit relay, app control", category: "Data & Smart", unit: "no", retail: 1850, ours: 1420, defaultQty: 0 },
+  { id: "hub", image: "/images/products/hub.svg", name: "Automation Hub + Sensors", spec: "Hub, motion, door, smoke", category: "Data & Smart", unit: "kit", retail: 14500, ours: 11200, defaultQty: 0 },
 ];
 
 export function brandPrice(base: number, factor: number) {

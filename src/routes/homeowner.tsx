@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { CalendarCheck, Check, Minus, Plus, ShieldCheck, Truck } from "lucide-react";
 import { toast } from "sonner";
 
+import { BrandLogo, CatalogImage } from "@/components/catalog-image";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -139,8 +140,8 @@ function HomeownerPage() {
           ))}
         </div>
 
-        <section className="mt-6 grid gap-6 lg:grid-cols-[1fr_20rem]">
-          <div className="space-y-6">
+        <section className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
+          <div className="min-w-0 space-y-6">
             {mode === "size" ? (
               <>
                 <Card className="surface-card">
@@ -208,6 +209,7 @@ function HomeownerPage() {
                         key={b.id}
                         type="button"
                         onClick={() => setBrandId(b.id)}
+                        aria-pressed={brandId === b.id}
                         className={cn(
                           "rounded-xl border p-4 text-left transition-all",
                           brandId === b.id
@@ -215,7 +217,8 @@ function HomeownerPage() {
                             : "border-border/70 bg-background/40 hover:border-primary/50",
                         )}
                       >
-                        <span className="font-display font-semibold">{b.name}</span>
+                        <BrandLogo brand={b} className="mb-3" />
+                        <span className="block font-display font-semibold">{b.name}</span>
                         <span className="mt-1 block text-xs text-muted-foreground">{b.note}</span>
                       </button>
                     ))}
@@ -242,9 +245,12 @@ function HomeownerPage() {
                               key={p.id}
                               className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border/70 bg-background/40 p-3"
                             >
-                              <div className="min-w-[12rem] flex-1">
-                                <p className="text-sm font-medium">{p.name}</p>
-                                <p className="text-xs text-muted-foreground">{p.spec}</p>
+                              <div className="flex min-w-0 basis-full items-center gap-3 sm:basis-auto sm:flex-1">
+                                <CatalogImage src={p.image} alt={p.name} />
+                                <div className="min-w-0">
+                                  <p className="text-sm font-medium">{p.name}</p>
+                                  <p className="text-xs text-muted-foreground">{p.spec}</p>
+                                </div>
                               </div>
                               <div className="text-right text-xs">
                                 <span className="text-muted-foreground line-through">
@@ -378,7 +384,7 @@ function HomeownerPage() {
 
                 <Dialog open={open} onOpenChange={setOpen}>
                   <DialogTrigger asChild>
-                    <Button size="lg" className="w-full">
+                    <Button size="lg" className="h-auto min-h-10 w-full whitespace-normal px-4 py-2">
                       <CalendarCheck className="size-4" /> Request Free On-Site Inspection
                     </Button>
                   </DialogTrigger>
