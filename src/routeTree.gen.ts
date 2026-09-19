@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as HomeownerRouteImport } from './routes/homeowner'
 import { Route as InspectorRouteImport } from './routes/inspector'
+import { Route as ProfessionalsRouteImport } from './routes/professionals'
 import { Route as SpotterRouteImport } from './routes/spotter'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const InspectorRoute = InspectorRouteImport.update({
   path: '/inspector',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfessionalsRoute = ProfessionalsRouteImport.update({
+  id: '/professionals',
+  path: '/professionals',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SpotterRoute = SpotterRouteImport.update({
   id: '/spotter',
   path: '/spotter',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/homeowner': typeof HomeownerRoute
   '/inspector': typeof InspectorRoute
+  '/professionals': typeof ProfessionalsRoute
   '/spotter': typeof SpotterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/homeowner': typeof HomeownerRoute
   '/inspector': typeof InspectorRoute
+  '/professionals': typeof ProfessionalsRoute
   '/spotter': typeof SpotterRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,28 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/homeowner': typeof HomeownerRoute
   '/inspector': typeof InspectorRoute
+  '/professionals': typeof ProfessionalsRoute
   '/spotter': typeof SpotterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/homeowner' | '/inspector' | '/spotter'
+  fullPaths: '/' | '/homeowner' | '/inspector' | '/professionals' | '/spotter'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/homeowner' | '/inspector' | '/spotter'
-  id: '__root__' | '/' | '/homeowner' | '/inspector' | '/spotter'
+  to: '/' | '/homeowner' | '/inspector' | '/professionals' | '/spotter'
+  id:
+    | '__root__'
+    | '/'
+    | '/homeowner'
+    | '/inspector'
+    | '/professionals'
+    | '/spotter'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   HomeownerRoute: typeof HomeownerRoute
   InspectorRoute: typeof InspectorRoute
+  ProfessionalsRoute: typeof ProfessionalsRoute
   SpotterRoute: typeof SpotterRoute
 }
 
@@ -92,6 +108,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InspectorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/professionals': {
+      id: '/professionals'
+      path: '/professionals'
+      fullPath: '/professionals'
+      preLoaderRoute: typeof ProfessionalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/spotter': {
       id: '/spotter'
       path: '/spotter'
@@ -106,6 +129,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HomeownerRoute: HomeownerRoute,
   InspectorRoute: InspectorRoute,
+  ProfessionalsRoute: ProfessionalsRoute,
   SpotterRoute: SpotterRoute,
 }
 export const routeTree = rootRouteImport
