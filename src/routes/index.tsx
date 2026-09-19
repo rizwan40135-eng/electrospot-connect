@@ -18,7 +18,10 @@ export const Route = createFileRoute("/")({
         content:
           "Direct-from-factory electrical packages for home construction. Earn cashback by spotting new builds near you.",
       },
-      { property: "og:title", content: "ElectroSpot — Factory-Direct Wiring Packages & Lead Rewards" },
+      {
+        property: "og:title",
+        content: "ElectroSpot — Factory-Direct Wiring Packages & Lead Rewards",
+      },
       {
         property: "og:description",
         content: "Bundled wiring packages for homeowners and cashback rewards for lead spotters.",
@@ -34,13 +37,12 @@ function Landing() {
   const [brandId, setBrandId] = useState<string | null>(null);
   const brand = BRANDS.find((item) => item.id === brandId);
 
-
   return (
     <div className="min-h-screen">
       <SiteHeader />
 
       <main>
-        <section className="border-b border-border bg-[#f5f2eb]">
+        <section className="border-b border-border bg-[#ece4d8]">
           <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-5 md:flex-row md:items-center md:gap-8">
             <div className="min-w-0 flex-1">
               <h1 className="text-2xl leading-tight font-semibold text-primary sm:text-3xl">
@@ -48,11 +50,6 @@ function Landing() {
                 <span className="block text-accent">+ earn rewards.</span>
               </h1>
               <div className="mt-4 flex flex-wrap gap-2">
-                <Button asChild size="sm" variant="secondary">
-                  <a href="#brands">
-                    Choose a brand <ArrowRight className="size-4" />
-                  </a>
-                </Button>
                 <Button asChild size="sm" variant="outline" className="bg-background/90">
                   <Link to="/spotter">Earn rewards</Link>
                 </Button>
@@ -60,10 +57,15 @@ function Landing() {
             </div>
             <img
               src={heroImg}
-              alt="Electrical wire coils, PVC conduits, circuit breakers, switches, sockets, LED light and junction box"
+              alt="House under construction with warm lights and scaffolding, behind electrical wires, conduits, breakers, switches and lighting supplies"
               width={1200}
               height={400}
-              className="h-44 w-full shrink-0 rounded-xl object-contain md:w-1/2"
+              className="h-44 w-full shrink-0 object-contain md:w-1/2"
+              style={{
+                maskImage:
+                  "linear-gradient(to right, transparent, black 4%, black 96%, transparent), linear-gradient(to bottom, transparent, black 6%, black 94%, transparent)",
+                maskComposite: "intersect",
+              }}
             />
           </div>
         </section>
@@ -73,7 +75,9 @@ function Landing() {
             <div className="flex flex-wrap items-end justify-between gap-2">
               <div>
                 <p className="text-xs font-semibold uppercase text-accent">Available brands</p>
-                <h2 className="mt-1 text-xl font-semibold text-primary">Choose a brand for its products</h2>
+                <h2 className="mt-1 text-xl font-semibold text-primary">
+                  Choose a brand for its products
+                </h2>
               </div>
               {brand && (
                 <Button asChild>
@@ -84,7 +88,11 @@ function Landing() {
               )}
             </div>
 
-            <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5" role="list" aria-label="Available electrical brands">
+            <div
+              className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5"
+              role="list"
+              aria-label="Available electrical brands"
+            >
               {BRANDS.map((item) => (
                 <Button
                   key={item.id}
@@ -103,30 +111,37 @@ function Landing() {
 
             <div id="brand-products" aria-live="polite">
               {brand ? (
-                <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3" role="region" aria-label={`${brand.name} products`}>
-              {PRODUCTS.slice(0, 6).map((product) => (
-                <Card key={product.id} className="border-border shadow-none transition-colors hover:border-accent">
-                  <CardContent className="flex items-center gap-3 p-3">
-                    <CatalogImage src={product.image} alt={product.name} className="size-14" />
-                    <div className="min-w-0 flex-1">
-                      <h3 className="text-sm leading-snug font-semibold text-primary">{product.name}</h3>
-                      <p className="mt-0.5 text-xs text-muted-foreground">{product.spec}</p>
-                      <div className="mt-1 flex flex-wrap items-baseline gap-x-2">
-                        <span className="text-xs text-muted-foreground line-through">
-                          {inr(brandPrice(product.retail, brand.factor))}
-                        </span>
-                        <span className="text-sm font-semibold text-primary">
-                          {inr(brandPrice(product.ours, brand.factor))}
-                        </span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                <div
+                  className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3"
+                  role="region"
+                  aria-label={`${brand.name} products`}
+                >
+                  {PRODUCTS.slice(0, 6).map((product) => (
+                    <Card
+                      key={product.id}
+                      className="border-border shadow-none transition-colors hover:border-accent"
+                    >
+                      <CardContent className="flex items-center gap-3 p-3">
+                        <CatalogImage src={product.image} alt={product.name} className="size-14" />
+                        <div className="min-w-0 flex-1">
+                          <h3 className="text-sm leading-snug font-semibold text-primary">
+                            {product.name}
+                          </h3>
+                          <p className="mt-0.5 text-xs text-muted-foreground">{product.spec}</p>
+                          <div className="mt-1 flex flex-wrap items-baseline gap-x-2">
+                            <span className="text-xs text-muted-foreground line-through">
+                              {inr(brandPrice(product.retail, brand.factor))}
+                            </span>
+                            <span className="text-sm font-semibold text-primary">
+                              {inr(brandPrice(product.ours, brand.factor))}
+                            </span>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
                 </div>
-              ) : (
-                <p className="mt-4 text-sm text-muted-foreground">Select a brand above to see its products and prices.</p>
-              )}
+              ) : null}
             </div>
           </div>
         </section>
