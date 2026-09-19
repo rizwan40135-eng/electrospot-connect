@@ -38,8 +38,8 @@ import {
 
 export const Route = createFileRoute("/homeowner")({
   validateSearch: (search: Record<string, unknown>) => ({
-    brand: typeof search.brand === "string" ? search.brand : undefined,
-    mode: search.mode === "custom" ? ("custom" as const) : undefined,
+    brand: typeof search["brand"] === "string" ? search["brand"] : undefined,
+    mode: search["mode"] === "custom" ? ("custom" as const) : undefined,
   }),
   head: () => ({
     meta: [
