@@ -1,10 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BadgeIndianRupee, ClipboardCheck, HardHat, Home, PackageCheck, Zap } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, PackageCheck, Zap } from "lucide-react";
 
-import heroImg from "@/assets/hero-construction.jpg";
+import heroImg from "@/assets/electrospot-home-products.jpg";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { BRANDS, PRODUCTS, brandPrice, inr } from "@/lib/electrospot-data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,150 +29,110 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-const roles = [
-  {
-    to: "/homeowner" as const,
-    icon: Home,
-    title: "Homeowner",
-    copy: "Estimate your full wiring package by house size and tier, see the item-by-item bill of materials, and book a free site inspection.",
-    cta: "Build my package",
-  },
-  {
-    to: "/spotter" as const,
-    icon: BadgeIndianRupee,
-    title: "Lead Spotter",
-    copy: "Spot a construction site, submit it in 30 seconds, and track your cashback from verification to payout.",
-    cta: "Submit a lead",
-  },
-  {
-    to: "/inspector" as const,
-    icon: HardHat,
-    title: "Site Inspector",
-    copy: "Work the verification queue, review geotagged site photos, and generate digital quotations on the spot.",
-    cta: "Open dashboard",
-  },
-];
-
-const stats = [
-  { value: "22–31%", label: "Average saving vs retail" },
-  { value: "₹6,200", label: "Top spotter payout this month" },
-  { value: "48 hrs", label: "Lead verification window" },
-  { value: "1,400+", label: "Homes wired" },
-];
-
 function Landing() {
+  const [brandId, setBrandId] = useState(BRANDS[0]?.id ?? "gm");
+  const brand = BRANDS.find((item) => item.id === brandId) ?? BRANDS[0];
+
+  if (!brand) return null;
+
   return (
     <div className="min-h-screen">
       <SiteHeader />
 
       <main>
-        <section className="border-b border-border">
-          <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-14 lg:grid-cols-[1.05fr_0.95fr] lg:py-20">
-            <div className="py-4">
-              <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-1.5 text-xs font-semibold uppercase text-primary">
-                <Zap className="size-3.5" /> Factory-direct electrical supply
+        <section className="relative min-h-[34rem] overflow-hidden border-b border-border sm:min-h-[40rem]">
+          <img
+            src={heroImg}
+            alt="Modern house under construction with electrical wires, switches, distribution board, conduits and lighting"
+            width={1600}
+            height={1000}
+            className="absolute inset-0 size-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/70 to-primary/5" />
+          <div className="relative mx-auto flex min-h-[34rem] max-w-6xl items-center px-4 py-16 sm:min-h-[40rem]">
+            <div className="max-w-3xl">
+              <span className="inline-flex items-center gap-2 rounded-md border border-primary-foreground/30 bg-primary/40 px-3 py-2 text-xs font-semibold uppercase text-primary-foreground backdrop-blur-sm">
+                <Zap className="size-4" /> ElectroSpot
               </span>
-              <h1 className="mt-7 max-w-2xl text-4xl leading-[1.05] font-semibold text-primary sm:text-5xl lg:text-6xl">
+              <h1 className="mt-6 text-4xl leading-[1.06] font-semibold text-primary-foreground sm:text-5xl lg:text-6xl">
                 Direct-from-factory electrical packages for home construction
-                <span className="text-electric"> + earn rewards by spotting new builds.</span>
+                <span className="block text-secondary">+ earn rewards.</span>
               </h1>
-              <p className="mt-6 max-w-xl text-base text-muted-foreground sm:text-lg">
-                One portal for three roles: homeowners price complete wiring packages, spotters get paid cashback for
-                verified construction leads, and inspectors close the loop with on-site quotations.
-              </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Button asChild size="lg">
-                  <Link to="/homeowner">
-                    Estimate my package <ArrowRight className="size-4" />
+                <Button asChild size="lg" variant="secondary">
+                  <Link to="/homeowner" search={{ brand: brand.id, mode: "custom" }}>
+                    Choose products <ArrowRight className="size-4" />
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline">
-                  <Link to="/spotter">Become a spotter</Link>
+                <Button asChild size="lg" variant="outline" className="border-primary-foreground/60 bg-background/90">
+                  <Link to="/spotter">Earn rewards</Link>
                 </Button>
               </div>
             </div>
+          </div>
+        </section>
 
-            <div className="relative mx-auto w-full max-w-lg">
-              <div className="aspect-[4/3] overflow-hidden rounded-lg border-8 border-card shadow-[var(--shadow-card)]">
-                <img
-                  src={heroImg}
-                  alt="House under construction at dusk with electrical conduit and wire coils"
-                  width={1600}
-                  height={1008}
-                  className="size-full object-cover"
-                />
+        <section className="border-b border-border bg-background">
+          <div className="mx-auto max-w-6xl px-4 py-14 sm:py-16">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="text-xs font-semibold uppercase text-accent">Available brands</p>
+                <h2 className="mt-2 text-3xl font-semibold text-primary">Choose a brand for its products</h2>
               </div>
-              <div className="absolute -bottom-5 right-4 rounded-md border border-border bg-card px-5 py-4 shadow-[var(--shadow-card)] sm:right-[-1rem]">
-                <p className="text-xs font-semibold uppercase text-accent">Factory advantage</p>
-                <p className="mt-1 font-display text-2xl font-semibold text-primary">Save up to 31%</p>
-              </div>
+              <Button asChild>
+                <Link to="/homeowner" search={{ brand: brand.id, mode: "custom" }}>
+                  View all {brand.name} products <ArrowRight className="size-4" />
+                </Link>
+              </Button>
             </div>
-          </div>
-        </section>
 
-        <section className="bg-primary py-10 text-primary-foreground">
-          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-4 md:grid-cols-4">
-            {stats.map((s) => (
-              <div key={s.label}>
-                <p className="font-display text-3xl font-semibold">{s.value}</p>
-                <p className="mt-1 text-xs text-primary-foreground/70">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-6xl px-4 py-20">
-          <h2 className="text-2xl font-semibold sm:text-3xl">Choose your view</h2>
-          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Every role has its own workspace. Switch anytime from the top navigation.
-          </p>
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
-            {roles.map((r) => (
-              <Card
-                key={r.title}
-                className="surface-card group border-border transition-all hover:-translate-y-1 hover:border-accent"
-              >
-                <CardContent className="flex h-full flex-col gap-4 p-6">
-                  <span className="grid size-11 place-items-center rounded-md border border-border bg-secondary text-accent transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
-                    <r.icon className="size-5" />
-                  </span>
-                  <h3 className="text-lg font-semibold">{r.title}</h3>
-                  <p className="flex-1 text-sm text-muted-foreground">{r.copy}</p>
-                  <Button asChild variant="ghost" className="justify-start px-0 text-accent hover:bg-transparent hover:text-primary">
-                    <Link to={r.to}>
-                      {r.cta}
-                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        <section className="border-y border-border bg-secondary/70">
-          <div className="mx-auto max-w-6xl px-4 py-16">
-            <h2 className="text-2xl font-semibold sm:text-3xl">How a lead becomes a wired home</h2>
-            <ol className="mt-8 grid gap-5 md:grid-cols-4">
-              {[
-                { icon: BadgeIndianRupee, t: "Spot", d: "A spotter photographs an ongoing build and drops a pin." },
-                { icon: ClipboardCheck, t: "Verify", d: "Admin checks the geotag, stage and owner contact." },
-                { icon: HardHat, t: "Inspect", d: "A technician visits, counts points and quotes digitally." },
-                { icon: PackageCheck, t: "Deliver", d: "Package ships from factory; spotter cashback is paid." },
-              ].map((s, i) => (
-                <li key={s.t} className="rounded-md border border-border bg-card p-5 shadow-[var(--shadow-card)]">
-                  <span className="font-display text-lg font-semibold text-accent">0{i + 1}.</span>
-                  <s.icon className="mt-3 size-5 text-primary" />
-                  <h3 className="mt-3 font-semibold">{s.t}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{s.d}</p>
-                </li>
+            <div className="mt-7 flex gap-2 overflow-x-auto pb-2" role="list" aria-label="Available electrical brands">
+              {BRANDS.map((item) => (
+                <Button
+                  key={item.id}
+                  type="button"
+                  variant={brand.id === item.id ? "default" : "outline"}
+                  onClick={() => setBrandId(item.id)}
+                  className="shrink-0"
+                  aria-pressed={brand.id === item.id}
+                >
+                  {item.name}
+                </Button>
               ))}
-            </ol>
+            </div>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {PRODUCTS.slice(0, 6).map((product) => (
+                <Card key={product.id} className="border-border shadow-none transition-colors hover:border-accent">
+                  <CardContent className="flex h-full flex-col p-5">
+                    <div className="flex items-start justify-between gap-4">
+                      <span className="grid size-10 shrink-0 place-items-center rounded-md bg-secondary text-primary">
+                        <PackageCheck className="size-5" />
+                      </span>
+                      <span className="text-xs text-muted-foreground">{product.category}</span>
+                    </div>
+                    <h3 className="mt-5 font-display text-lg font-semibold text-primary">{product.name}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">{product.spec}</p>
+                    <div className="mt-5 flex items-end justify-between gap-3 border-t border-border pt-4">
+                      <span className="text-xs font-medium text-accent">{brand.name}</span>
+                      <div className="text-right">
+                        <span className="mr-2 text-xs text-muted-foreground line-through">
+                          {inr(brandPrice(product.retail, brand.factor))}
+                        </span>
+                        <span className="font-display text-lg font-semibold text-primary">
+                          {inr(brandPrice(product.ours, brand.factor))}
+                        </span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-border/60 py-8">
+      <footer className="py-8">
         <div className="mx-auto max-w-6xl px-4 text-xs text-muted-foreground">
           ElectroSpot — electrical supply & construction lead sourcing.
         </div>

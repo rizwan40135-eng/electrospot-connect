@@ -37,6 +37,10 @@ import {
 } from "@/lib/electrospot-data";
 
 export const Route = createFileRoute("/homeowner")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    brand: typeof search["brand"] === "string" ? search["brand"] : undefined,
+    mode: search["mode"] === "custom" ? ("custom" as const) : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Package Estimator for Homeowners — ElectroSpot" },
@@ -64,10 +68,12 @@ const SLOTS = ["09:00 – 11:00", "11:00 – 13:00", "14:00 – 16:00", "16:00 �
 type Mode = "size" | "custom";
 
 function HomeownerPage() {
-  const [mode, setMode] = useState<Mode>("size");
+  const search = Route.useSearch();
+  const requestedBrand = BRANDS.some((item) => item.id === search.brand) ? search.brand : undefined;
+  const [mode, setMode] = useState<Mode>(search.mode ?? "size");
   const [size, setSize] = useState<HouseSize>("1500");
   const [tier, setTier] = useState<Tier>("Standard");
-  const [brandId, setBrandId] = useState("gm");
+  const [brandId, setBrandId] = useState(requestedBrand ?? "gm");
   const [qty, setQty] = useState<Record<string, number>>({ ...DEFAULT_QUANTITIES });
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
@@ -75,7 +81,8 @@ function HomeownerPage() {
   const [date, setDate] = useState("");
   const [slot, setSlot] = useState("");
 
-  const brand = BRANDS.find((b) => b.id === brandId) ?? BRANDS[0]!;
+  const brand = BRANDS.find((b) => b.id === brandId) ?? BRANDS[0];
+  if (!brand) return null;
   const bom = useMemo(
     () => (mode === "size" ? buildBom(size, tier) : customBom(qty, brand.factor)),
     [mode, size, tier, qty, brand.factor],
