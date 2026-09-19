@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, Zap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import heroImg from "@/assets/electrospot-home-products.jpg";
 import { BrandLogo, CatalogImage } from "@/components/catalog-image";
@@ -41,7 +41,7 @@ function Landing() {
       <SiteHeader />
 
       <main>
-        <section className="relative min-h-[34rem] overflow-hidden border-b border-border sm:min-h-[40rem]">
+        <section className="relative overflow-hidden border-b border-border">
           <img
             src={heroImg}
             alt="Modern house under construction with electrical wires, switches, distribution board, conduits and lighting"
@@ -50,22 +50,19 @@ function Landing() {
             className="absolute inset-0 size-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/70 to-primary/5" />
-          <div className="relative mx-auto flex min-h-[34rem] max-w-6xl items-center px-4 py-16 sm:min-h-[40rem]">
-            <div className="max-w-3xl">
-              <span className="inline-flex items-center gap-2 rounded-md border border-primary-foreground/30 bg-primary/40 px-3 py-2 text-xs font-semibold uppercase text-primary-foreground backdrop-blur-sm">
-                <Zap className="size-4" /> ElectroSpot
-              </span>
-              <h1 className="mt-6 text-4xl leading-[1.06] font-semibold text-primary-foreground sm:text-5xl lg:text-6xl">
+          <div className="relative mx-auto flex max-w-6xl items-center px-4 py-6 lg:py-5">
+            <div className="max-w-2xl">
+              <h1 className="text-2xl leading-tight font-semibold text-primary-foreground sm:text-3xl">
                 Direct-from-factory electrical packages for home construction
                 <span className="block text-secondary">+ earn rewards.</span>
               </h1>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button asChild size="lg" variant="secondary">
+              <div className="mt-4 flex flex-wrap gap-2">
+                <Button asChild size="sm" variant="secondary">
                   <Link to="/homeowner" search={{ brand: brand.id, mode: "custom" }}>
                     Choose products <ArrowRight className="size-4" />
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="border-primary-foreground/60 bg-background/90">
+                <Button asChild size="sm" variant="outline" className="border-primary-foreground/60 bg-background/90">
                   <Link to="/spotter">Earn rewards</Link>
                 </Button>
               </div>
@@ -74,11 +71,11 @@ function Landing() {
         </section>
 
         <section className="border-b border-border bg-background">
-          <div className="mx-auto max-w-6xl px-4 py-14 sm:py-16">
-            <div className="flex flex-wrap items-end justify-between gap-4">
+          <div className="mx-auto max-w-6xl px-4 py-4">
+            <div className="flex flex-wrap items-end justify-between gap-2">
               <div>
                 <p className="text-xs font-semibold uppercase text-accent">Available brands</p>
-                <h2 className="mt-2 text-3xl font-semibold text-primary">Choose a brand for its products</h2>
+                <h2 className="mt-1 text-xl font-semibold text-primary">Choose a brand for its products</h2>
               </div>
               <Button asChild>
                 <Link to="/homeowner" search={{ brand: brand.id, mode: "custom" }}>
@@ -87,39 +84,35 @@ function Landing() {
               </Button>
             </div>
 
-            <div className="mt-7 flex gap-2 overflow-x-auto pb-2" role="list" aria-label="Available electrical brands">
+            <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5" role="list" aria-label="Available electrical brands">
               {BRANDS.map((item) => (
                 <Button
                   key={item.id}
                   type="button"
                   variant={brand.id === item.id ? "default" : "outline"}
                   onClick={() => setBrandId(item.id)}
-                  className="h-auto min-w-36 shrink-0 flex-col gap-3 px-4 py-3"
+                  className="h-auto min-w-0 flex-col gap-1 px-2 py-2 text-xs whitespace-normal"
                   aria-pressed={brand.id === item.id}
                 >
-                  <BrandLogo brand={item} />
+                  <BrandLogo brand={item} className="h-9 w-24 p-1" />
                   {item.name}
                 </Button>
               ))}
             </div>
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
               {PRODUCTS.slice(0, 6).map((product) => (
                 <Card key={product.id} className="border-border shadow-none transition-colors hover:border-accent">
-                  <CardContent className="flex h-full flex-col p-5">
-                    <div className="flex items-start justify-between gap-4">
-                      <CatalogImage src={product.image} alt={product.name} className="size-20" />
-                      <span className="text-xs text-muted-foreground">{product.category}</span>
-                    </div>
-                    <h3 className="mt-5 font-display text-lg font-semibold text-primary">{product.name}</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">{product.spec}</p>
-                    <div className="mt-5 flex items-end justify-between gap-3 border-t border-border pt-4">
-                      <span className="text-xs font-medium text-accent">{brand.name}</span>
-                      <div className="text-right">
-                        <span className="mr-2 text-xs text-muted-foreground line-through">
+                  <CardContent className="flex items-center gap-3 p-3">
+                    <CatalogImage src={product.image} alt={product.name} className="size-14" />
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-sm leading-snug font-semibold text-primary">{product.name}</h3>
+                      <p className="mt-0.5 text-xs text-muted-foreground">{product.spec}</p>
+                      <div className="mt-1 flex flex-wrap items-baseline gap-x-2">
+                        <span className="text-xs text-muted-foreground line-through">
                           {inr(brandPrice(product.retail, brand.factor))}
                         </span>
-                        <span className="font-display text-lg font-semibold text-primary">
+                        <span className="text-sm font-semibold text-primary">
                           {inr(brandPrice(product.ours, brand.factor))}
                         </span>
                       </div>
@@ -132,7 +125,7 @@ function Landing() {
         </section>
       </main>
 
-      <footer className="py-8">
+      <footer className="py-2">
         <div className="mx-auto max-w-6xl px-4 text-xs text-muted-foreground">
           ElectroSpot — electrical supply & construction lead sourcing.
         </div>
