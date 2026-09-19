@@ -1,17 +1,17 @@
 import { Link } from "@tanstack/react-router";
-import { QuotationButton } from "@/components/quotation";
 import { Zap } from "lucide-react";
 
 const links = [
   { to: "/", label: "Home" },
-  { to: "/homeowner", label: "Homeowners" },
-  { to: "/professionals", label: "For professionals" },
+  { to: "/homeowner", label: "Homeowner" },
+  { to: "/spotter", label: "Lead Spotter" },
+  { to: "/inspector", label: "Site Inspector" },
 ] as const;
 
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-card/90 backdrop-blur-xl">
-      <div className="mx-auto flex min-h-20 max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-3">
+      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-4">
         <Link to="/" className="flex items-center gap-2 font-semibold tracking-tight">
           <span className="grid size-9 rotate-3 place-items-center rounded-md bg-accent text-accent-foreground shadow-[var(--shadow-glow)]">
             <Zap className="size-4" />
@@ -20,10 +20,7 @@ export function SiteHeader() {
             Electro<span className="text-accent">Spot</span>
           </span>
         </Link>
-        <nav
-          aria-label="Main navigation"
-          className="order-3 flex w-full items-center gap-1 overflow-x-auto text-sm sm:order-none sm:w-auto"
-        >
+        <nav className="flex items-center gap-1 overflow-x-auto text-sm">
           {links.map((l) => (
             <Link
               key={l.to}
@@ -37,7 +34,6 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <QuotationButton />
       </div>
     </header>
   );

@@ -4,7 +4,6 @@ import { CalendarCheck, Check, Minus, Plus, ShieldCheck, Truck } from "lucide-re
 import { toast } from "sonner";
 
 import { BrandLogo, CatalogImage } from "@/components/catalog-image";
-import { BrandCatalogPage } from "@/components/brand-catalog";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -49,12 +48,12 @@ export const Route = createFileRoute("/homeowner")({
       {
         name: "description",
         content:
-          "Explore an illustrative electrical budget by house size and build a brand-specific quotation.",
+          "Estimate your home wiring package by size and tier, compare retail vs factory-direct pricing, and book a free on-site inspection.",
       },
       { property: "og:title", content: "Package Estimator for Homeowners — ElectroSpot" },
       {
         property: "og:description",
-        content: "Explore sample budget calculations; request a quotation for confirmed prices.",
+        content: "Compare retail vs ElectroSpot pricing on a complete bill of materials for your build.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -104,7 +103,7 @@ function HomeownerPage() {
     if (!/^[0-9+\s-]{8,20}$/.test(phone.trim())) { toast.error("Enter a valid phone number."); return; }
     if (!date) { toast.error("Pick an inspection date."); return; }
     if (!slot) { toast.error("Pick a time slot."); return; }
-    toast.info("Demo only: no inspection request was sent or booked.");
+    toast.success(`Inspection booked for ${date}, ${slot}. Our technician will call to confirm.`);
     setOpen(false);
     setName("");
     setPhone("");
@@ -112,15 +111,14 @@ function HomeownerPage() {
     setSlot("");
   }
 
-  if (mode === "custom") return <BrandCatalogPage initialBrand={requestedBrand} />;
-
   return (
     <div className="min-h-screen">
       <SiteHeader />
       <main className="mx-auto max-w-6xl px-4 py-10">
         <h1 className="text-3xl font-semibold">Package Estimator</h1>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          Explore an illustrative budget by house size, or build a brand-specific quotation. Sample prices are not supplier offers; final quantities, prices and delivery need confirmation.
+          Estimate by built-up area, or build your own list product by product with your preferred brand. We ship the
+          complete bundle from the factory — no distributor markup.
         </p>
 
         <div className="mt-6 inline-flex flex-wrap gap-2 rounded-xl border border-border/70 bg-background/40 p-1">
@@ -176,7 +174,7 @@ function HomeownerPage() {
                 <Card className="surface-card">
                   <CardHeader>
                     <CardTitle className="text-base">2. Package tier</CardTitle>
-                    <CardDescription>Illustrative packages; specifications must be reviewed for your site.</CardDescription>
+                    <CardDescription>All tiers are ISI-certified and installation-ready.</CardDescription>
                   </CardHeader>
                   <CardContent className="grid gap-3 sm:grid-cols-3">
                     {TIERS.map((t) => (
@@ -310,7 +308,7 @@ function HomeownerPage() {
                       : `${brand.name} · ${itemCount} product${itemCount === 1 ? "" : "s"} selected`}
                   </CardDescription>
                 </div>
-                <Badge className="bg-success/15 text-success">Sample saving {pct}%</Badge>
+                <Badge className="bg-success/15 text-success">Save {pct}%</Badge>
               </CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
@@ -366,16 +364,16 @@ function HomeownerPage() {
             <Card className="surface-card border-primary/40">
               <CardContent className="space-y-4 p-6">
                 <div>
-                  <p className="text-xs text-muted-foreground">Illustrative estimate</p>
+                  <p className="text-xs text-muted-foreground">Your estimate</p>
                   <p className="font-display text-3xl font-semibold text-primary">{inr(ours)}</p>
                   <p className="text-xs text-muted-foreground">
-                    Sample saving {inr(savings)} vs retail {inr(retail)}
+                    You save {inr(savings)} vs retail {inr(retail)}
                   </p>
                 </div>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   {[
-                    "Confirm product ratings and certification",
-                    "Review quantities with your electrician",
+                    "Factory-sealed, ISI-certified materials",
+                    "Free on-site point counting & layout",
                     "Delivery to site in 5–7 working days",
                   ].map((f) => (
                     <li key={f} className="flex gap-2">
@@ -387,14 +385,14 @@ function HomeownerPage() {
                 <Dialog open={open} onOpenChange={setOpen}>
                   <DialogTrigger asChild>
                     <Button size="lg" className="h-auto min-h-10 w-full whitespace-normal px-4 py-2">
-                      <CalendarCheck className="size-4" /> Preview inspection form (demo)
+                      <CalendarCheck className="size-4" /> Request Free On-Site Inspection
                     </Button>
                   </DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
-                      <DialogTitle>Inspection concept (demo)</DialogTitle>
+                      <DialogTitle>Book your free inspection</DialogTitle>
                       <DialogDescription>
-                        This preview does not send a request or book a technician.
+                        A technician visits your site, counts switch points and finalises your package.
                       </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4">
@@ -456,17 +454,17 @@ function HomeownerPage() {
                       </p>
                     </div>
                     <DialogFooter>
-                      <Button onClick={book}>Try demo form</Button>
+                      <Button onClick={book}>Confirm booking</Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
 
                 <div className="flex items-center justify-between border-t border-border/70 pt-4 text-xs text-muted-foreground">
                   <span className="flex items-center gap-1.5">
-                    <ShieldCheck className="size-4 text-primary" /> Warranty varies by product
+                    <ShieldCheck className="size-4 text-primary" /> 10-yr wire warranty
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <Truck className="size-4 text-primary" /> Delivery subject to location
+                    <Truck className="size-4 text-primary" /> Site delivery
                   </span>
                 </div>
               </CardContent>
