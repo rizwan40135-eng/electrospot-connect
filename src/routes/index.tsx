@@ -41,17 +41,9 @@ function Landing() {
       <SiteHeader />
 
       <main>
-        <section className="relative overflow-hidden border-b border-border">
-          <img
-            src={heroImg}
-            alt="Modern house under construction with electrical wires, switches, distribution board, conduits and lighting"
-            width={1600}
-            height={1000}
-            className="absolute inset-0 size-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/70 to-primary/5" />
-          <div className="relative mx-auto flex max-w-6xl items-center px-4 py-6 lg:py-5">
-            <div className="max-w-2xl">
+        <section className="border-b border-border bg-primary">
+          <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-5 md:flex-row md:items-center md:gap-8">
+            <div className="min-w-0 flex-1">
               <h1 className="text-2xl leading-tight font-semibold text-primary-foreground sm:text-3xl">
                 Direct-from-factory electrical packages for home construction
                 <span className="block text-secondary">+ earn rewards.</span>
@@ -67,6 +59,13 @@ function Landing() {
                 </Button>
               </div>
             </div>
+            <img
+              src={heroImg}
+              alt="Modern house under construction with electrical wires, switches, distribution board, conduits and lighting"
+              width={1600}
+              height={1000}
+              className="h-44 w-full shrink-0 object-contain md:w-2/5"
+            />
           </div>
         </section>
 
