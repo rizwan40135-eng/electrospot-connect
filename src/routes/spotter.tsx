@@ -90,7 +90,7 @@ function SpotterPage() {
         <header className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <h1 className="text-3xl font-semibold">Lead Spotter Portal</h1>
-            <p className="mt-2 max-w-xl text-sm text-muted-foreground">
+            <p className="mt-3 max-w-xl rounded-lg border-l-4 border-accent bg-accent/10 px-4 py-3 text-base font-semibold leading-relaxed text-primary">
               Spot an ongoing build, submit it, and earn cashback once the deal closes.
             </p>
           </div>
