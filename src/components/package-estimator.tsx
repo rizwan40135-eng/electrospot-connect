@@ -78,7 +78,14 @@ export function PackageEstimator({
   const brand = BRANDS.find((b) => b.id === brandId) ?? BRANDS[0]!;
 
   const bom = useMemo(
-    () => (mode === "size" ? buildBom(size, tier) : customBom(qty, brand.factor)),
+    () =>
+      mode === "size"
+        ? buildBom(size, tier).map((item) => ({
+            ...item,
+            retail: brandPrice(item.retail, brand.factor),
+            ours: brandPrice(item.ours, brand.factor),
+          }))
+        : customBom(qty, brand.factor),
     [mode, size, tier, qty, brand.factor],
   );
   const retail = bom.reduce((s, i) => s + i.retail, 0);
@@ -138,6 +145,36 @@ export function PackageEstimator({
             </p>
           </div>
         )}
+        <section className="mt-6" aria-label="Brand selection">
+          <Card className="surface-card">
+            <CardHeader>
+              <CardTitle className="text-base">Choose a brand</CardTitle>
+              <CardDescription>
+                Choose a brand for either estimation option. Prices are illustrative.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
+              {BRANDS.map((b) => (
+                <button
+                  key={b.id}
+                  type="button"
+                  onClick={() => setBrandId(b.id)}
+                  aria-pressed={brandId === b.id}
+                  className={cn(
+                    "rounded-xl border p-4 text-left transition-all",
+                    brandId === b.id
+                      ? "border-primary bg-primary/10 shadow-[var(--shadow-glow)]"
+                      : "border-border/70 bg-background/40 hover:border-primary/50",
+                  )}
+                >
+                  <BrandLogo brand={b} className="mb-3" />
+                  <span className="block font-display font-semibold">{b.name}</span>
+                  <span className="mt-1 block text-xs text-muted-foreground">{b.note}</span>
+                </button>
+              ))}
+            </CardContent>
+          </Card>
+        </section>
         <div className="mt-6 inline-flex flex-wrap gap-2 rounded-xl border border-border/70 bg-background/40 p-1">
           {(
             [
@@ -228,33 +265,6 @@ export function PackageEstimator({
             ) : (
               <>
                 <Card className="surface-card">
-                  <CardHeader>
-                    <CardTitle className="text-base">1. Brand</CardTitle>
-                    <CardDescription>Pricing updates for the brand you choose.</CardDescription>
-                  </CardHeader>
-                  <CardContent className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                    {BRANDS.map((b) => (
-                      <button
-                        key={b.id}
-                        type="button"
-                        onClick={() => setBrandId(b.id)}
-                        aria-pressed={brandId === b.id}
-                        className={cn(
-                          "rounded-xl border p-4 text-left transition-all",
-                          brandId === b.id
-                            ? "border-primary bg-primary/10 shadow-[var(--shadow-glow)]"
-                            : "border-border/70 bg-background/40 hover:border-primary/50",
-                        )}
-                      >
-                        <BrandLogo brand={b} className="mb-3" />
-                        <span className="block font-display font-semibold">{b.name}</span>
-                        <span className="mt-1 block text-xs text-muted-foreground">{b.note}</span>
-                      </button>
-                    ))}
-                  </CardContent>
-                </Card>
-
-                <Card className="surface-card">
                   <CardHeader className="flex-row items-center justify-between gap-3">
                     <div>
                       <CardTitle className="text-base">2. Products & quantities</CardTitle>
@@ -343,7 +353,7 @@ export function PackageEstimator({
                   <CardTitle className="text-base">3. Bill of materials</CardTitle>
                   <CardDescription>
                     {mode === "size"
-                      ? `${SIZE_LABELS[size]} · ${tier} package`
+                      ? `${brand.name} / ${SIZE_LABELS[size]} · ${tier} package`
                       : `${brand.name} · ${itemCount} product${itemCount === 1 ? "" : "s"} selected`}
                   </CardDescription>
                 </div>
@@ -430,7 +440,9 @@ export function PackageEstimator({
 
                 <OrderRequest
                   items={bom}
-                  packageLabel={mode === "size" ? `${SIZE_LABELS[size]} / ${tier}` : brand.name}
+                  packageLabel={
+                    mode === "size" ? `${brand.name} / ${SIZE_LABELS[size]} / ${tier}` : brand.name
+                  }
                   professional={professional}
                 />
                 <p className="text-xs text-muted-foreground">
@@ -507,7 +519,7 @@ export function PackageEstimator({
                       <p className="rounded-lg bg-background/50 p-3 text-xs text-muted-foreground">
                         Package in context:{" "}
                         {mode === "size"
-                          ? `${SIZE_LABELS[size]} · ${tier}`
+                          ? `${brand.name} / ${SIZE_LABELS[size]} · ${tier}`
                           : `${brand.name} · ${itemCount} products`}{" "}
                         · {inr(ours)}
                       </p>
