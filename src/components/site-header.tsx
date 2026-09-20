@@ -4,9 +4,9 @@ import { Zap } from "lucide-react";
 const links = [
   { to: "/", label: "Home" },
   { to: "/homeowner", label: "Homeowner" },
+  { to: "/electrician", label: "Electrician/Contractor" },
   { to: "/spotter", label: "Lead Spotter" },
   { to: "/inspector", label: "Site Inspector" },
-  { to: "/electrician", label: "Electrician/Contractor" },
 ] as const;
 
 export function SiteHeader() {
