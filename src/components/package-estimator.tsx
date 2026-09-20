@@ -128,12 +128,12 @@ export function PackageEstimator({
       <SiteHeader />
       <main className="mx-auto max-w-6xl px-4 py-10">
         <h1 className="text-3xl font-semibold">
-          {professional ? "Electrician / Contractor" : "Package Estimator"}
+          {professional ? "Electrician / Contractor" : "Homeowner"}
         </h1>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
           {professional
             ? "Buy electrical materials on behalf of homeowners. Build a project list, review the order and earn rewards on eligible purchases."
-            : "Estimate your electrical package by house size or choose a brand and quantities, then review your order."}
+            : "Estimate a package by house size, or select Place Order to choose products and quantities."}
         </p>
 
         {professional && (
@@ -145,12 +145,36 @@ export function PackageEstimator({
             </p>
           </div>
         )}
+        <div className="mt-6 inline-flex flex-wrap gap-2 rounded-xl border border-border/70 bg-background/40 p-1">
+          {(
+            [
+              { id: "size", label: professional ? "By house size" : "Package Estimator" },
+              { id: "custom", label: professional ? "By products & quantity" : "Place Order" },
+            ] as { id: Mode; label: string }[]
+          ).map((m) => (
+            <button
+              key={m.id}
+              type="button"
+              onClick={() => setMode(m.id)}
+              aria-pressed={mode === m.id}
+              className={cn(
+                "rounded-lg px-4 py-2 text-sm font-medium transition-colors",
+                mode === m.id
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {m.label}
+            </button>
+          ))}
+        </div>
+
         <section className="mt-6" aria-label="Brand selection">
           <Card className="surface-card">
             <CardHeader>
               <CardTitle className="text-base">Choose a brand</CardTitle>
               <CardDescription>
-                Choose a brand for either estimation option. Prices are illustrative.
+                Choose your preferred brand for your estimate or order. Prices are illustrative.
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
@@ -175,28 +199,6 @@ export function PackageEstimator({
             </CardContent>
           </Card>
         </section>
-        <div className="mt-6 inline-flex flex-wrap gap-2 rounded-xl border border-border/70 bg-background/40 p-1">
-          {(
-            [
-              { id: "size", label: "By house size" },
-              { id: "custom", label: "By products & quantity" },
-            ] as { id: Mode; label: string }[]
-          ).map((m) => (
-            <button
-              key={m.id}
-              type="button"
-              onClick={() => setMode(m.id)}
-              className={cn(
-                "rounded-lg px-4 py-2 text-sm font-medium transition-colors",
-                mode === m.id
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground",
-              )}
-            >
-              {m.label}
-            </button>
-          ))}
-        </div>
 
         <section className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
           <div className="min-w-0 space-y-6">
