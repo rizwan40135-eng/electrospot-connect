@@ -22,12 +22,12 @@ import {
 export const Route = createFileRoute("/spotter")({
   head: () => ({
     meta: [
-      { title: "Lead Spotter Portal — ElectroSpot" },
+      { title: "Site Spotter Portal — ElectroSpot" },
       {
         name: "description",
         content: "Submit construction site leads, track verification status and watch your cashback wallet grow.",
       },
-      { property: "og:title", content: "Lead Spotter Portal — ElectroSpot" },
+      { property: "og:title", content: "Site Spotter Portal — ElectroSpot" },
       { property: "og:description", content: "Submit site leads and track cashback payouts on ElectroSpot." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -89,7 +89,7 @@ function SpotterPage() {
       <main className="mx-auto max-w-6xl px-4 py-10">
         <header className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-semibold">Lead Spotter Portal</h1>
+            <h1 className="text-3xl font-semibold">Site Spotter Portal</h1>
             <p className="mt-3 max-w-xl rounded-lg border-l-4 border-accent bg-accent/10 px-4 py-3 text-base font-semibold leading-relaxed text-primary">
               Spot an ongoing build, submit it, and earn cashback once the deal closes.
             </p>

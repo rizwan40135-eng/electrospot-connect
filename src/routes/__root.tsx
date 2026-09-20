@@ -88,7 +88,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "ElectroSpot — Factory-Direct Electrical Packages" },
       {
         property: "og:description",
-        content: "Wiring packages for home builders and cashback rewards for lead spotters.",
+        content: "Wiring packages for home builders and cashback rewards for site spotters.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -139,4 +139,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-

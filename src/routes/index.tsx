@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:description",
-        content: "Bundled wiring packages for homeowners and cashback rewards for lead spotters.",
+        content: "Bundled wiring packages for homeowners and cashback rewards for site spotters.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
