@@ -38,10 +38,10 @@ function Landing() {
   const brand = BRANDS.find((item) => item.id === brandId);
 
   return (
-    <div className="min-h-screen">
+    <div className="flex min-h-dvh flex-col">
       <SiteHeader />
 
-      <main>
+      <main className="flex-1">
         <section className="border-b border-border bg-[#ece4d8]">
           <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-5 md:flex-row md:items-center md:gap-8">
             <div className="min-w-0 flex-1">
