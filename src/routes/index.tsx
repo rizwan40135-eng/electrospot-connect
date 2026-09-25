@@ -47,16 +47,12 @@ function Landing() {
             <div className="min-w-0 flex-1">
               <h1 className="text-2xl leading-tight font-semibold text-primary sm:text-3xl">
                 Building or Upgrading Your Home?
-                <span className="block text-accent">Plan Your Electrical Needs in One Place.</span>
+                <span className="block text-accent">Your Electrical Needs. One Destination. Better Value.</span>
               </h1>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Estimate a complete electrical package for a new home, or choose individual products
-                for repairs and upgrades. Compare brands, plan your budget, and prepare your
-                order—from wires and switches to lighting and other essentials.
-              </p>
-              <p className="mt-2 text-sm font-semibold text-primary">
-                Direct-from-factory electrical packages for home construction
-                <span className="block text-accent">+ earn rewards.</span>
+                We buy directly from manufacturers and pass the savings on to you. Explore trusted
+                brands, estimate your home’s electrical package, or choose individual products for
+                repairs and upgrades.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <Button asChild size="sm">
