@@ -46,12 +46,20 @@ function Landing() {
           <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-5 md:flex-row md:items-center md:gap-8">
             <div className="min-w-0 flex-1">
               <h1 className="text-2xl leading-tight font-semibold text-primary sm:text-3xl">
-                Direct-from-factory electrical packages for home construction
-                <span className="block text-accent">+ earn rewards.</span>
+                Building or Upgrading Your Home?
+                <span className="block text-accent">Plan Your Electrical Needs in One Place.</span>
               </h1>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Estimate a complete electrical package for a new home, or choose individual products
+                for repairs and upgrades. Compare brands, plan your budget, and prepare your
+                order—from wires and switches to lighting and other essentials.
+              </p>
               <div className="mt-4 flex flex-wrap gap-2">
+                <Button asChild size="sm">
+                  <Link to="/homeowner" search={{ brand: undefined, mode: undefined }}>Estimate My Home Package</Link>
+                </Button>
                 <Button asChild size="sm" variant="outline" className="bg-background/90">
-                  <Link to="/spotter">Earn rewards</Link>
+                  <Link to="/homeowner" search={{ brand: undefined, mode: "custom" }}>Shop Electrical Products</Link>
                 </Button>
               </div>
             </div>
