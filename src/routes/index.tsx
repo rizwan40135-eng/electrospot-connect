@@ -54,6 +54,9 @@ function Landing() {
                 for repairs and upgrades. Compare brands, plan your budget, and prepare your
                 order—from wires and switches to lighting and other essentials.
               </p>
+              <p className="mt-2 text-sm font-semibold text-primary">
+                Factory-direct sourcing means fewer middlemen and lower costs for your home’s electrical needs.
+              </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <Button asChild size="sm">
                   <Link to="/homeowner" search={{ brand: undefined, mode: undefined }}>Estimate My Home Package</Link>
