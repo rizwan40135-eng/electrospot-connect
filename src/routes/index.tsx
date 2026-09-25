@@ -55,7 +55,8 @@ function Landing() {
                 order—from wires and switches to lighting and other essentials.
               </p>
               <p className="mt-2 text-sm font-semibold text-primary">
-                Factory-direct sourcing means fewer middlemen and lower costs for your home’s electrical needs.
+                Direct-from-factory electrical packages for home construction
+                <span className="block text-accent">+ earn rewards.</span>
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <Button asChild size="sm">
